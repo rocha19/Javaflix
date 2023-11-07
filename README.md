@@ -1,5 +1,9 @@
 # Javaflix API
 
+## Objective
+
+  Application creation to disciple `Object-oriented programming with Java`
+
 ## check features implemented
 
   * Objects             👌🏾     
@@ -8,7 +12,7 @@
   * Access modifier     👌🏾
   * Heritage
   * Composition
-  * Polimorfismo
+  * Polimorfism
   * Overwrite
   * Overload
   * Abstract Class
@@ -17,3 +21,7 @@
   * MVC architecture     👌🏾
   * Graphical interface  👌🏾 React.js
   * Persistence          👌🏾 SQlite
+
+## Run application
+
+  `mvn spring-boot:run`
