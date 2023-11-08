@@ -1,14 +1,21 @@
-package com.learn.javaflix.utils.database;
+package com.learn.javaflix.libs;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class SqLite
 {
-  public static void handle()
+  public Connection connect() throws SQLException {
+    // create a database connection and return it
+    return DriverManager.getConnection("jdbc:sqlite:javaflix.db");
+  }
+  
+  public void handle()
   {
     Connection connection = null;
     try
@@ -19,16 +26,7 @@ public class SqLite
       statement.setQueryTimeout(30);  // set timeout to 30 sec.
 
       // statement.executeUpdate("drop table if exists movie");
-      statement.executeUpdate("create table movie (id integer, externalId integer)");
-      // statement.executeUpdate("insert into movie values(1, 123)");
-      // statement.executeUpdate("insert into movie values(2, 321)");
-      ResultSet rs = statement.executeQuery("select * from movie");
-      while(rs.next())
-      {
-        // read the result set
-        System.out.println("id = " + rs.getInt("id"));
-        System.out.println("externalId = " + rs.getString("externalId"));
-      }
+      statement.executeUpdate("CREATE TABLE movie (id INTEGER PRIMARY KEY AUTOINCREMENT, externalId INTEGER UNIQUE, username VARCHAR(20) UNIQUE, password VARCHAR(20) UNIQUE, access_token VARCHAR(20) UNIQUE NULL)");
     }
     catch(SQLException e)
     {
