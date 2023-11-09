@@ -8,7 +8,7 @@ import com.learn.javaflix.models.Movie;
 public interface MovieRepositoryContract {
   List<Movie> findAll();
   Optional<Movie> findById(int id);
-  boolean save(int externalId, int useiId);
+  boolean save(Movie movie);
   boolean  updateById(int id, String username);
   boolean  deleteById(int id);
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.javaflix.libs.SqLite;
+import com.learn.javaflix.models.Movie;
 import com.learn.javaflix.repositories.MovieRepository;
 
 import jakarta.validation.Valid;
@@ -24,12 +25,12 @@ public class SaveMovie {
 
   @PostMapping("/save")
   public ResponseEntity<Object> handle(@Valid @RequestHeader Map<String, String> headers, @RequestBody Movie movie) {
-    if (movie.externalId() == null) {
+    if (movie.getExternalId() < 1) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Empty field: Add a movie id!");
     }
 
     MovieRepository movieRepository = new MovieRepository(sqlite);
-    boolean response = movieRepository.save(movie.externalId(), movie.userId());
+    boolean response = movieRepository.save(movie);
 
     if (!response) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Movie already exists!");
@@ -38,5 +39,5 @@ public class SaveMovie {
     return ResponseEntity.status(HttpStatus.CREATED).body("");
   }
   
-  record Movie(Integer externalId, Integer userId) {}
+  // record Movie(int id, int externalId, String posterPath, String title, String overview, String releaseDate) {}
 }

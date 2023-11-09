@@ -35,13 +35,17 @@ Register um user to access service:
 `/api/register`
 
 ```json
-  body : {
-    "username": "string",
-    "password": "string"
-  }
+  {
+    "request": {
+      "body": {
+        "username": "string",
+        "password": "string"
+      },
+    },
 
-  response : {
-    "status": 201,
+    "response": {
+      "status": 201,
+    }
   }
 ```
 
@@ -50,14 +54,19 @@ Access API:
 `/api/login`
 
 ```json
-  body : {
-    "username": "string",
-    "password": "string"
-  }
+  {
+    "body": {
+      "username": "string",
+      "password": "string"
+    },
 
-  response : {
-  "status": 200,
-  "token": "string"
+    "response": {
+      "status": 200,
+      "body": {
+        "token": "string",
+        "id": "number" # userID
+      }
+    }
   }
 ```
 
@@ -66,20 +75,23 @@ Save a movie on favorites:
 `/api/save`
 
 ```json
-  header : {
-    "Authorization": "token",
-  }
+  {
+    "request": {
+      "header": {
+        "Authorization": "token",
+      },
+    },
 
-  body : {
-    "id": "number",
-    "poster_path": "string",
-    "title": "string",
-    "overview": "string",
-    "release_date": "string"
-  }
-
-  response : {
-    "status": 201
+    "response": {
+    "status": 201,
+    "body": {
+      "externalId": "number", # movieID
+      "poster_path": "string",
+      "title": "string",
+      "overview": "string",
+      "release_date": "string"
+      }
+    }  
   }
 ```
 
@@ -88,20 +100,27 @@ Find a list of movies favorites:
 `/api/movies`
 
 ```json
-  header : {
-    "Authorization": "token",
-  }
+  {
+    "request": {
+      "header" : {
+        "Authorization": "token",
+      },
+      "body": {
+        "id": "number" # user ID
+      }
+    },
 
-  response : {
-    "status": 200
-    body: {
-      [{
-        "id": "number",
-        "poster_path": "string",
-        "title": "string",
-        "overview": "string",
-        "release_date": "string"
-      }]
+    "response": {
+      "status": 200,
+      "body": {
+        [{
+          "id": "number",
+          "poster_path": "string",
+          "title": "string",
+          "overview": "string",
+          "release_date": "string"
+        }]
+      }
     }
   }
 ```
@@ -111,18 +130,25 @@ Find a movie favorite:
 `/api/movie/{id}`
 
 ```json
-  header : {
-    "Authorization": "token",
-  }
+  {
+    "request": {
+      "header" : {
+        "Authorization": "token",
+      },
+      "body": {
+        "id": "number" # user ID
+      }
+    },
 
-  response : {
-    "status": 200
-    body: {{
-        "id": "number",
-        "poster_path": "string",
-        "title": "string",
-        "overview": "string",
-        "release_date": "string"
+    "response": {
+      "status": 200,
+      "body": {{
+          "id": "number",
+          "poster_path": "string",
+          "title": "string",
+          "overview": "string",
+          "release_date": "string"
+        }
       }
     }
   }

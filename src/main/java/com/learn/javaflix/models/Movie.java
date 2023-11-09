@@ -1,18 +1,17 @@
 package com.learn.javaflix.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public abstract class Movie {
+  protected int id;
   protected int externalId;
-  protected int useId;
-  protected String accessToken;
-
-  public Movie(int externalId, int useId, String accessToken) {
-    this.externalId = externalId;
-    this.useId = useId;
-    this.accessToken = accessToken;
-  }
+  protected String posterPath;
+  protected String title;
+  protected String overview;
+  protected String releaseDate;
 }
 
 

@@ -37,7 +37,10 @@ public class MovieRepository implements MovieRepositoryContract
         movies.add(new FeatureFilm(
             resultSet.getInt("id"),
             resultSet.getInt("externalId"),
-            resultSet.getString("access_token")
+            resultSet.getString("poster_path"),
+            resultSet.getString("title"),
+            resultSet.getString("overview"),
+            resultSet.getString("release_date")
       ));
     }
     } catch (SQLException e) {
@@ -58,7 +61,10 @@ public class MovieRepository implements MovieRepositoryContract
           return Optional.of(new FeatureFilm(
             resultSet.getInt("id"),
             resultSet.getInt("externalId"),
-            resultSet.getString("access_token")
+            resultSet.getString("poster_path"),
+            resultSet.getString("title"),
+            resultSet.getString("overview"),
+            resultSet.getString("release_date")
           ));
         }
       }
@@ -69,13 +75,13 @@ public class MovieRepository implements MovieRepositoryContract
   }
 
   @Override 
-  public boolean save(int externalId, int userId) {
+  public boolean save(Movie movie) {
     try (Connection connection = sqlite.connect();
-         PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM movie WHERE externalId = (?) AND userId = (?)");
-         PreparedStatement insertStmt = connection.prepareStatement("INSERT INTO movie (externalId) VALUES (?) WHERE userId = (?)")) {
+         PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM movie WHERE externalId = (?) AND id = (?)");
+         PreparedStatement insertStmt = connection.prepareStatement("INSERT INTO movie (externalId, poster_path, title, overview, release_date) VALUES (?, ?, ?, ?, ?) WHERE id = (?)")) {
 
-      checkStatement.setInt(1, userId);
-      checkStatement.setInt(2, externalId);
+      checkStatement.setInt(1, movie.getExternalId());
+      checkStatement.setInt(2, movie.getId());
 
       try (ResultSet resultSet = checkStatement.executeQuery()) {
         if (resultSet.next()) {
@@ -83,8 +89,11 @@ public class MovieRepository implements MovieRepositoryContract
         }
       }
 
-      insertStmt.setInt(1, externalId);
-      insertStmt.setInt(2, userId);
+      insertStmt.setInt(1, movie.getExternalId());
+      insertStmt.setString(2, movie.getPosterPath());
+      insertStmt.setString(3, movie.getTitle());
+      insertStmt.setString(4, movie.getOverview());
+      insertStmt.setString(5, movie.getReleaseDate());
 
       insertStmt.executeUpdate();
       return true;
