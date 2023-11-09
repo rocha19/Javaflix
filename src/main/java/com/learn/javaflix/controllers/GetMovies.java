@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.javaflix.models.Movie;
 import com.learn.javaflix.repositories.MovieRepository;
-import com.learn.javaflix.service.ApiRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,19 +19,14 @@ public class GetMovies {
   @Autowired
   private MovieRepository movieRepository;
 
-  @Autowired
-  private ApiRequest apiRequest;
-
   @GetMapping("/movies")
   public ResponseEntity<List<Movie>> getAllMovies() {
     List<Movie> movies = movieRepository.findAll();
-    apiRequest.perform(0);
     return ResponseEntity.ok(movies);
   }
 
   @GetMapping("/movie/{id}")
   public ResponseEntity<Movie> getMovieById(@PathVariable int id) {
-    apiRequest.perform(id);
     Optional<Movie> movie = movieRepository.findById(id);
     return movie
         .map(ResponseEntity::ok)
