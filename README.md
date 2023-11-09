@@ -104,9 +104,6 @@ Find a list of movies favorites:
     "request": {
       "header" : {
         "Authorization": "token",
-      },
-      "body": {
-        "id": "number" # user ID
       }
     },
 
@@ -134,9 +131,6 @@ Find a movie favorite:
     "request": {
       "header" : {
         "Authorization": "token",
-      },
-      "body": {
-        "id": "number" # user ID
       }
     },
 
