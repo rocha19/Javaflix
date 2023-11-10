@@ -3,6 +3,7 @@ package com.learn.javaflix.controllers;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ public class SaveMovie {
   @Autowired
   private SqLite sqlite;
 
+  @CrossOrigin
   @PostMapping("/save")
   public ResponseEntity<Object> handle(@Valid @RequestHeader Map<String, String> headers, @RequestBody Movie movie) {
     if (movie.getExternalId() < 1) {

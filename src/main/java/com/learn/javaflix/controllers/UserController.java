@@ -1,6 +1,7 @@
 package com.learn.javaflix.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ public class UserController
   @Autowired
   private RegisterUserService registerUserService;
 
+  @CrossOrigin
   @PostMapping("/login")
   public ResponseEntity<Object> login(@RequestBody User user) 
   {
@@ -37,6 +39,7 @@ public class UserController
     }
   }
 
+  @CrossOrigin
   @PostMapping("/register")
   public ResponseEntity<Object> register(@Valid @RequestBody User user) 
   {
