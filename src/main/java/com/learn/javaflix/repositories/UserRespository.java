@@ -24,7 +24,7 @@ public class UserRespository implements UserRepositoryContract
   @Override
   public Optional<User> findByUsername(String username) 
   {
-    String sql = "SELECT * FROM movie WHERE username = (?)";
+    String sql = "SELECT * FROM movie WHERE username = ?";
     try (Connection connection = sqlite.connect();
         PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
@@ -33,8 +33,7 @@ public class UserRespository implements UserRepositoryContract
         if (resultSet.next()) {
           return Optional.of(new User(
               resultSet.getString("username"), 
-              resultSet.getString("password"), 
-              resultSet.getString("access_token")
+              resultSet.getString("password")
               ));
         }
       }
