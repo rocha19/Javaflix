@@ -26,7 +26,7 @@ public class SqLite
       statement.setQueryTimeout(30);  // set timeout to 30 sec.
 
       // statement.executeUpdate("drop table if exists movie");
-      statement.executeUpdate("CREATE TABLE movie (id INTEGER PRIMARY KEY AUTOINCREMENT, externalId INTEGER UNIQUE, username VARCHAR(20) UNIQUE, password VARCHAR(20) UNIQUE, poster_path VARCHAR(200) NULL, title VARCHAR(200) NULL), overview VARCHAR(200) NULL, release_date  VARCHAR(200) NULL");
+      statement.executeUpdate("CREATE TABLE IF NOT EXISTS movie (id INTEGER PRIMARY KEY AUTOINCREMENT, externalId INTEGER UNIQUE, username VARCHAR(20) UNIQUE, password VARCHAR(20) UNIQUE, poster_path VARCHAR(200) NULL, title VARCHAR(200) NULL, overview VARCHAR(200) NULL, release_date VARCHAR(200) NULL );");
     }
     catch(SQLException e)
     {
