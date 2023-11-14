@@ -16,7 +16,6 @@ import com.learn.javaflix.models.Movie;
 import com.learn.javaflix.repositories.MovieRepository;
 
 @RestController
-@CrossOrigin(maxAge = 3600, allowCredentials = "true")
 @RequestMapping("/api")
 public class SaveMovie {
   @Autowired
