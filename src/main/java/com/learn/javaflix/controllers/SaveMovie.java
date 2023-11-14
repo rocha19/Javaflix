@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,9 +15,8 @@ import com.learn.javaflix.libs.SqLite;
 import com.learn.javaflix.models.Movie;
 import com.learn.javaflix.repositories.MovieRepository;
 
-import jakarta.validation.Valid;
-
 @RestController
+@CrossOrigin(maxAge = 3600, allowCredentials = "true")
 @RequestMapping("/api")
 public class SaveMovie {
   @Autowired
@@ -26,7 +24,7 @@ public class SaveMovie {
 
   @CrossOrigin
   @PostMapping("/save")
-  public ResponseEntity<Object> handle(@Valid @RequestHeader Map<String, String> headers, @RequestBody Movie movie) {
+  public ResponseEntity<Object> handle(Map<String, String> headers, @RequestBody Movie movie) {
     if (movie.getExternalId() < 1) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Empty field: Add a movie id!");
     }
