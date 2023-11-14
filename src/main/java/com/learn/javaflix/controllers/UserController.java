@@ -16,6 +16,7 @@ import com.learn.javaflix.service.RegisterUserService;
 import jakarta.validation.Valid;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api")
 public class UserController 
 {
