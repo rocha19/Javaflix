@@ -2,6 +2,9 @@ package com.learn.javaflix;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.learn.javaflix.libs.SqLite;
 
@@ -11,5 +14,15 @@ public class JavaflixApplication {
 		SqLite sqLite = new SqLite();
 		sqLite.handle();
 		SpringApplication.run(JavaflixApplication.class, args);
+	}
+
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("http://localhost:5173");
+			}
+		};
 	}
 }

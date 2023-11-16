@@ -15,6 +15,7 @@ import com.learn.javaflix.service.RegisterUserService;
 
 import jakarta.validation.Valid;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class UserController 
@@ -26,7 +27,7 @@ public class UserController
   @Autowired
   private RegisterUserService registerUserService;
 
-  @CrossOrigin
+
   @PostMapping("/login")
   public ResponseEntity<Object> login(@RequestBody User user) 
   {
@@ -39,7 +40,6 @@ public class UserController
     }
   }
 
-  @CrossOrigin
   @PostMapping("/register")
   public ResponseEntity<Object> register(@Valid @RequestBody User user) 
   {

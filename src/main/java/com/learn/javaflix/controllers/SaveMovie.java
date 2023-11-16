@@ -3,9 +3,9 @@ package com.learn.javaflix.controllers;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,13 +15,13 @@ import com.learn.javaflix.libs.SqLite;
 import com.learn.javaflix.models.Movie;
 import com.learn.javaflix.repositories.MovieRepository;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class SaveMovie {
   @Autowired
   private SqLite sqlite;
 
-  @CrossOrigin
   @PostMapping("/save")
   public ResponseEntity<Object> handle(Map<String, String> headers, @RequestBody Movie movie) {
     if (movie.getExternalId() < 1) {

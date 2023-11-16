@@ -1,5 +1,8 @@
 package com.learn.javaflix.controllers;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,23 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.learn.javaflix.models.Movie;
 import com.learn.javaflix.repositories.MovieRepository;
 
-import java.util.List;
-import java.util.Optional;
-
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class GetMovies {
   @Autowired
   private MovieRepository movieRepository;
 
-  @CrossOrigin
   @GetMapping("/movies")
   public ResponseEntity<List<Movie>> getAllMovies() {
     List<Movie> movies = movieRepository.findAll();
     return ResponseEntity.ok(movies);
   }
 
-  @CrossOrigin
   @GetMapping("/movie/{id}")
   public ResponseEntity<Movie> getMovieById(@PathVariable int id) {
     Optional<Movie> movie = movieRepository.findById(id);

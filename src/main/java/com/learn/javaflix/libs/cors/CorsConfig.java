@@ -1,4 +1,4 @@
-package com.learn.javaflix.libs;
+package com.learn.javaflix.libs.cors;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
