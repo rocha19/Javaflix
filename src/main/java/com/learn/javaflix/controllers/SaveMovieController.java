@@ -18,7 +18,7 @@ import com.learn.javaflix.repositories.MovieRepository;
 @CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/api")
-public class SaveMovie {
+public class SaveMovieController {
   @Autowired
   private SqLite sqlite;
 

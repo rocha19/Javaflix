@@ -17,7 +17,7 @@ import com.learn.javaflix.repositories.MovieRepository;
 @CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/api")
-public class GetMovies {
+public class GetMoviesController {
   @Autowired
   private MovieRepository movieRepository;
 
