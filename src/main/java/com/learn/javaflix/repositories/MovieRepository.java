@@ -41,6 +41,9 @@ public class MovieRepository implements MovieRepositoryContract
             resultSet.getString("title"),
             resultSet.getString("overview"),
             resultSet.getString("release_date")
+            resultSet.getString("comments")
+            resultSet.getBoolean("like")
+            resultSet.getBoolean("dislike")
       ));
     }
     } catch (SQLException e) {
@@ -65,6 +68,10 @@ public class MovieRepository implements MovieRepositoryContract
             resultSet.getString("title"),
             resultSet.getString("overview"),
             resultSet.getString("release_date")
+            resultSet.getString("comments")
+            resultSet.getBoolean("like")
+            resultSet.getBoolean("dislike")
+
           ));
         }
       }
@@ -78,7 +85,7 @@ public class MovieRepository implements MovieRepositoryContract
   public boolean save(Movie movie) {
     try (Connection connection = sqlite.connect();
          PreparedStatement checkStatement = connection.prepareStatement("SELECT * FROM movie WHERE externalId = (?) AND id = (?)");
-         PreparedStatement insertStmt = connection.prepareStatement("INSERT INTO movie (externalId, poster_path, title, overview, release_date) VALUES (?, ?, ?, ?, ?) WHERE id = (?)")) {
+         PreparedStatement insertStmt = connection.prepareStatement("INSERT INTO movie (externalId, poster_path, title, overview, release_date, comments, like, dislike) VALUES (?, ?, ?, ?, ?, ?, ?, ?) WHERE id = (?)")) {
 
       checkStatement.setInt(1, movie.getExternalId());
       checkStatement.setInt(2, movie.getId());
@@ -94,6 +101,9 @@ public class MovieRepository implements MovieRepositoryContract
       insertStmt.setString(3, movie.getTitle());
       insertStmt.setString(4, movie.getOverview());
       insertStmt.setString(5, movie.getReleaseDate());
+      insertStmt.setString(6, movie.getComments());
+      insertStmt.setBoolean(7, movie.getLike());
+      insertStmt.setBoolean(8, movie.getDisLike());
 
       insertStmt.executeUpdate();
       return true;

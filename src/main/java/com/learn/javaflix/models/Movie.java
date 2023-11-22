@@ -12,6 +12,9 @@ public abstract class Movie {
   protected String title;
   protected String overview;
   protected String releaseDate;
+  protected String comments;
+  protected boolean like;
+  protected boolean dislike;
 }
 
 
